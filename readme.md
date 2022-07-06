@@ -29,10 +29,10 @@ spring.datasource.password: password
 ## Rutas
 
 ### Las rutas principales son: 
-http://localhost:8080/country
-http://localhost:8080/employee
-http://localhost:8080/airport
-http://localhost:8080/language
+* http://localhost:8080/country
+* http://localhost:8080/employee
+* http://localhost:8080/airport
+* http://localhost:8080/language
 
 ### Ruta para insertar datos del txt
-http://localhost:8080/employee
+* http://localhost:8080/apiv1/clientes/add/

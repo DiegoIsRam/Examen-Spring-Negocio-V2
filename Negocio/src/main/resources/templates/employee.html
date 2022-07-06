@@ -14,6 +14,9 @@
         <th>ID</th>
         <th>Surname</th>
         <th>Firstname</th>
+        <th>Country</th>
+        <th>Language</th>
+        <th>Airport</th>
         <th>Editar</th>
         <th>Eliminar</th>
 
@@ -22,6 +25,8 @@
         <td th:text="${employee.id}">Mostrar Id</td>
         <td th:text="${employee.surname}">Mostrar Surname</td>
         <td th:text="${employee.firstname}">Mostrar firstname</td>
+        <td th:text="${employee.idCountry}">Mostrar firstname</td>
+        <td th:text="${employee.idLanguage}">Mostrar firstname</td>
         <td><a th:href="@{/employee/editar/} + ${employee.id}" th:text="Editar"/></td>
         <td><a th:href="@{/employee/eliminar/} + ${employee.id}" th:text="Eliminar"/></td>
 

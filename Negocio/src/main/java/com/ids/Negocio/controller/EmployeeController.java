@@ -1,15 +1,17 @@
 package com.ids.Negocio.controller;
 
-import com.ids.Negocio.domain.Employee;
+import com.ids.Negocio.domain.*;
+import com.ids.Negocio.services.airport.AirportService;
+import com.ids.Negocio.services.country.CountryService;
 import com.ids.Negocio.services.employee.EmployeeService;
-import com.ids.Negocio.services.pythonconnect.PythonService;
+import com.ids.Negocio.services.language.LanguageService;
+import com.ids.Negocio.services.python.createobjects.CreateObjectsFromJson;
+import com.ids.Negocio.services.python.getdata.GetDataFromPythonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -17,9 +19,17 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
-
     @Autowired
-    private PythonService pythonService;
+    private GetDataFromPythonService pythonService;
+    @Autowired
+    private CreateObjectsFromJson createObjectsFromJson;
+    @Autowired
+    private AirportService airportService;
+    @Autowired
+    private LanguageService languageService;
+    @Autowired
+    private CountryService countryService;
+
     @GetMapping("/employee")
     public String paginaEmployee(Model model){
         var employees=employeeService.listarEmpleados();
@@ -42,15 +52,20 @@ public class EmployeeController {
         return "modificarEmployee";
     }
 
-    @GetMapping("/employee/add/")
-     public String mostrarDesdePython(){
-        List<Employee> employeeList= pythonService.ObtenerEmpleadosFromPython();
-        for ( Employee empleado:
-             employeeList) {
-            employeeService.guardaEmpleado(empleado);
-            System.out.println(empleado);
+    @GetMapping("/apiv1/clientes/add/")
+     public String insertarDesdePython(){
+        for (Country country:createObjectsFromJson.ReturnCountries()) {
+            countryService.guardaPais(country);
         }
-        System.out.println(employeeList);
+        for (Language language :createObjectsFromJson.ReturnLanguage()) {
+            languageService.guardarIdioma(language);
+        }
+        for (Airport airport:createObjectsFromJson.ReturnAirports()) {
+            airportService.guardarAeropuerto(airport);
+        }
+        for (Employee employee:createObjectsFromJson.ReturnEmployees()) {
+            employeeService.guardaEmpleado(employee);
+        }
         return "redirect:/employee";
 
     }

@@ -13,7 +13,7 @@ public List<JsonPython> GetDataFromPython() {
         return  listaEmpleados;
     }
  ```
- ##Base de Datos H2
+## Base de Datos H2
  
  Para acceder a la base de datos se debe tomar en cuenta la siguiente configuración
  ```java

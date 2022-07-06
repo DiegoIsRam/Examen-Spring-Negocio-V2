@@ -13,3 +13,13 @@ public List<JsonPython> GetDataFromPython() {
         return  listaEmpleados;
     }
  ```
+ ##Base de Datos H2
+ 
+ Para acceder a la base de datos se debe tomar en cuenta la siguiente configuración
+ ```java
+spring.datasource.url: jdbc:h2:mem:db_negocio
+spring.datasource.driverClassName: org.h2.Driver
+spring.datasource.username: sa
+spring.datasource.password: password
+ 
+ ```
